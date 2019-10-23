@@ -21,7 +21,7 @@ class MedicamentView(generics.ListCreateAPIView):
     serializer_class = MedicamentSerializer
 
     def get(self, request, *args, **kwargs):
-        query = request.query_params.get('search', None)
+        query = request.query_params.get('query', None)
         if query:
             medicaments = self.queryset.filter(name__contains=query)
         else:
