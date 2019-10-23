@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from pharmacy.models import Organization, Medicament, Branch, MedicamentInPharmacy
+from pharmacy.models import Organization, Medicament, Branch, MedicamentInBranch
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
@@ -35,7 +35,7 @@ class MedicamentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MedicamentInPharmacySerializer(serializers.ModelSerializer):
+class MedicamentInBranchSerializer(serializers.ModelSerializer):
     branch_id = serializers.PrimaryKeyRelatedField(
         queryset=Branch.objects.all(),
         source='branch.id'
@@ -46,14 +46,14 @@ class MedicamentInPharmacySerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = MedicamentInPharmacy
+        model = MedicamentInBranch
         fields = ('id', 'branch_id', 'medicament_id', 'price', 'count')
 
     def create(self, validated_data):
         branch = validated_data.pop('branch')['id']
         medicament = validated_data.pop('medicament')['id']
 
-        medicament_in_pharmacy = MedicamentInPharmacy.objects.create(
+        medicament_in_pharmacy = MedicamentInBranch.objects.create(
             branch=branch,
             medicament=medicament,
             **validated_data

@@ -1,10 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
-from pharmacy.models import Organization, Branch, Medicament, MedicamentInPharmacy
+from pharmacy.models import Organization, Branch, Medicament, MedicamentInBranch
 from pharmacy.serializers import OrganizationSerializer, BranchSerializer, MedicamentSerializer, \
-    MedicamentInPharmacySerializer
+    MedicamentInBranchSerializer
 
 
 class OrganizationView(generics.ListCreateAPIView):
@@ -32,9 +31,9 @@ class MedicamentView(generics.ListCreateAPIView):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
-class MedicamentInPharmacyView(generics.ListCreateAPIView):
-    queryset = MedicamentInPharmacy.objects.all()
-    serializer_class = MedicamentInPharmacySerializer
+class MedicamentInBranchView(generics.ListCreateAPIView):
+    queryset = MedicamentInBranch.objects.all()
+    serializer_class = MedicamentInBranchSerializer
 
     def get(self, request, pk=None, *args, **kwargs):
         serializer = self.serializer_class(self.queryset.filter(branch_id=pk), many=True)

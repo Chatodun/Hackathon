@@ -31,7 +31,7 @@ class Medicament(models.Model):
         return self.name
 
 
-class MedicamentInPharmacy(models.Model):
+class MedicamentInBranch(models.Model):
     branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     medicament = models.ForeignKey(Medicament, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
