@@ -12,8 +12,8 @@ class Organization(models.Model):
 class Branch(models.Model):
     address = models.CharField(max_length=100, verbose_name='Адрес', help_text='Введите адрес')
     phone = models.CharField(max_length=13, verbose_name='Телефон', help_text='Введите телефон')
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    open_time = models.TimeField()
+    close_time = models.TimeField()
     organization = models.ForeignKey(Organization, verbose_name='Организация', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -32,7 +32,7 @@ class Medicament(models.Model):
 
 
 class MedicamentInPharmacy(models.Model):
-    pharmacy = models.ManyToManyField(Branch)
+    pharmacy = models.ForeignKey(Branch, on_delete=models.CASCADE)
     medicament = models.ForeignKey(Medicament, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
     count = models.PositiveSmallIntegerField()
