@@ -22,7 +22,7 @@ class BranchSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         branch = Branch.objects.create(
-            organization_id=validated_data.pop('organization')['id'],
+            organization=validated_data.pop('organization')['id'],
             **validated_data
         )
         return branch
@@ -36,9 +36,9 @@ class MedicamentSerializer(serializers.ModelSerializer):
 
 
 class MedicamentInPharmacySerializer(serializers.ModelSerializer):
-    pharmacy_id = serializers.PrimaryKeyRelatedField(
+    branch_id = serializers.PrimaryKeyRelatedField(
         queryset=Branch.objects.all(),
-        source='pharmacy.id'
+        source='branch.id'
     )
     medicament_id = serializers.PrimaryKeyRelatedField(
         queryset=Medicament.objects.all(),
@@ -47,15 +47,15 @@ class MedicamentInPharmacySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = MedicamentInPharmacy
-        fields = ('id', 'pharmacy_id', 'medicament_id', 'price', 'count')
+        fields = ('id', 'branch_id', 'medicament_id', 'price', 'count')
 
     def create(self, validated_data):
-        pharmacy_id = validated_data.pop('pharmacy')['id']
-        medicament_id = validated_data.pop('medicament')['id']
+        branch = validated_data.pop('branch')['id']
+        medicament = validated_data.pop('medicament')['id']
 
         medicament_in_pharmacy = MedicamentInPharmacy.objects.create(
-            pharmacy_id=pharmacy_id,
-            medicamet_id=medicament_id,
+            branch=branch,
+            medicamet=medicament,
             **validated_data
         )
 

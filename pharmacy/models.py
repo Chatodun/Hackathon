@@ -32,7 +32,7 @@ class Medicament(models.Model):
 
 
 class MedicamentInPharmacy(models.Model):
-    pharmacy = models.ForeignKey(Branch, on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE)
     medicament = models.ForeignKey(Medicament, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
     count = models.PositiveSmallIntegerField()
