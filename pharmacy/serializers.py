@@ -55,7 +55,7 @@ class MedicamentInPharmacySerializer(serializers.ModelSerializer):
 
         medicament_in_pharmacy = MedicamentInPharmacy.objects.create(
             branch=branch,
-            medicamet=medicament,
+            medicament=medicament,
             **validated_data
         )
 
