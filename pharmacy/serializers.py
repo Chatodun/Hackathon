@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from pharmacy.models import Organization, Medicament, Branch, MedicamentInBranch
+from pharmacy.models import Organization, Medicament, Branch, MedicamentInBranch, Category
 
 
 class OrganizationSerializer(serializers.ModelSerializer):
@@ -60,3 +60,11 @@ class MedicamentInBranchSerializer(serializers.ModelSerializer):
         )
 
         return medicament_in_pharmacy
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    products = MedicamentSerializer(many=True)
+
+    class Meta:
+        model = Category
+        fields = ('name', 'products', )

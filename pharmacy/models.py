@@ -26,7 +26,7 @@ class Category(models.Model):
 
 class Medicament(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название', help_text='Название препарата')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     image = models.ImageField()
     manual = models.TextField()
     manufacturer = models.CharField(max_length=100)
