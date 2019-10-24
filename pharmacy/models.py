@@ -20,8 +20,13 @@ class Branch(models.Model):
         return f'{self.organization.name},{self.address}'
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+
 class Medicament(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название', help_text='Название препарата')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField()
     manual = models.TextField()
     manufacturer = models.CharField(max_length=100)
