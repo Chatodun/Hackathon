@@ -28,3 +28,4 @@ admin.site.register(Organization, OrganizationAdmin)
 admin.site.register(Branch, BranchAdmin)
 admin.site.register(Medicament, MedicamentAdmin)
 admin.site.register(MedicamentInBranch, MedicamentInBranchAdmin)
+
