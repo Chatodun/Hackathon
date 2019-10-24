@@ -28,6 +28,37 @@ class BranchSerializer(serializers.ModelSerializer):
         return branch
 
 
+class BranchWithMedicamentInfoSerializer(serializers.ModelSerializer):
+    branch_id = serializers.PrimaryKeyRelatedField(
+        queryset=Branch.objects.all(),
+        source='branch.id'
+    )
+    organization_name = serializers.CharField(
+        source='branch.organization.name'
+    )
+    address = serializers.CharField(
+        source='branch.address'
+    )
+    phone = serializers.CharField(
+        source='branch.phone'
+    )
+    open_time = serializers.CharField(
+        source='branch.open_time'
+    )
+    close_time = serializers.CharField(
+        source='branch.close_time'
+    )
+    medicament_id = serializers.PrimaryKeyRelatedField(
+        queryset=Medicament.objects.all(),
+        source='medicament.id'
+    )
+
+    class Meta:
+        model = MedicamentInBranch
+        fields = ('id', 'branch_id', 'medicament_id', 'price', 'count',
+                  'organization_name', 'address', 'phone', 'open_time', 'close_time')
+
+
 class MedicamentSerializer(serializers.ModelSerializer):
 
     class Meta:

@@ -19,7 +19,7 @@ class MedicamentInBranchAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Organization, OrganizationAdmin)
-admin.site.register(Branch, BranchAdmin)
-admin.site.register(Medicament, MedicamentAdmin)
 admin.site.register(MedicamentInBranch, MedicamentInBranchAdmin)
+admin.site.register(Medicament, MedicamentAdmin)
+admin.site.register(Branch, BranchAdmin)
+admin.site.register(Organization, OrganizationAdmin)
