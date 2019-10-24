@@ -113,7 +113,6 @@ venv.bak/
 .mypy_cache/myvenv
 .idea
 >>>>>>> work authorization
-*/migrations/00*.py
 /htmlcov
 /media/idea
 /media/image
