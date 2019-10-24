@@ -3,7 +3,7 @@ from rest_framework.response import Response
 
 from pharmacy.models import Organization, Branch, Medicament, MedicamentInBranch
 from pharmacy.serializers import OrganizationSerializer, BranchSerializer, MedicamentSerializer, \
-    MedicamentInBranchSerializer
+    MedicamentInBranchSerializer, BranchWithMedicamentInfoSerializer
 
 
 class OrganizationView(generics.ListCreateAPIView):
@@ -44,7 +44,7 @@ class MedicamentView(generics.ListCreateAPIView):
 
 class MedicamentInBranchView(generics.ListCreateAPIView):
     queryset = MedicamentInBranch.objects.all()
-    serializer_class = MedicamentInBranchSerializer
+    serializer_class = BranchWithMedicamentInfoSerializer
 
     def get(self, request, *args, **kwargs):
         medicament_id = request.query_params.get('medicament_id', None)
