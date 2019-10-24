@@ -46,7 +46,12 @@ class MedicamentInBranchView(generics.ListCreateAPIView):
     queryset = MedicamentInBranch.objects.all()
     serializer_class = MedicamentInBranchSerializer
 
-    def get(self, request, pk=None, *args, **kwargs):
-        serializer = self.serializer_class(self.queryset.filter(branch_id=pk), many=True)
+    def get(self, request, *args, **kwargs):
+        medicament_id = request.query_params.get('medicament_id', None)
+        if medicament_id:
+            queryset = self.queryset.filter(medicament_id=medicament_id)
+        else:
+            queryset = self.queryset.all()
+        serializer = self.serializer_class(queryset, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
